@@ -96,3 +96,7 @@ workflow with npm provenance** (required since 1 May 2026). This folder contains
 3. `npm run release` (lint, build, version bump, tag, push) — the tag triggers the publish.
 4. Check with `npx @n8n/scan-community-package n8n-nodes-stablora`, then submit the package in the
    n8n Creator Portal (creators.n8n.io).
+
+## License
+
+[MIT](LICENSE)
