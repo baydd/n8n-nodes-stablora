@@ -1,0 +1,27 @@
+{
+  "name": "Stablora: order → crypto checkout → mark paid",
+  "nodes": [
+    { "parameters": { "httpMethod": "POST", "path": "new-order", "responseMode": "lastNode", "options": {} },
+      "name": "New order", "type": "n8n-nodes-base.webhook", "typeVersion": 2, "position": [0, 0] },
+    { "parameters": { "resource": "checkoutSession", "operation": "create", "reference": "={{ $json.body.orderId }}", "amount": "={{ $json.body.totalUsd }}",
+        "description": "=Order {{ $json.body.orderId }}", "successUrl": "https://shop.example.com/thanks" },
+      "name": "Create checkout", "type": "n8n-nodes-stablora.stablora", "typeVersion": 1, "position": [260, 0],
+      "credentials": { "stabloraApi": { "name": "Stablora API" } } },
+    { "parameters": { "respondWith": "json", "responseBody": "={{ { paymentUrl: $json.url } }}" },
+      "name": "Return payment URL", "type": "n8n-nodes-base.respondToWebhook", "typeVersion": 1, "position": [520, 0] },
+    { "parameters": { "events": ["payment.completed"], "confirm": true },
+      "name": "Payment completed", "type": "n8n-nodes-stablora.stabloraTrigger", "typeVersion": 1, "position": [0, 260],
+      "credentials": { "stabloraApi": { "name": "Stablora API" } } },
+    { "parameters": { "method": "POST", "url": "https://shop.example.com/api/orders/mark-paid", "sendBody": true,
+        "bodyParameters": { "parameters": [
+          { "name": "orderId", "value": "={{ $json.payment.reference.split('#')[0] }}" },
+          { "name": "stabloraPaymentId", "value": "={{ $json.payment.id }}" },
+          { "name": "paidWith", "value": "={{ $json.payment.asset + ' on ' + $json.payment.network }}" } ] } },
+      "name": "Mark order paid", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4, "position": [260, 260] }
+  ],
+  "connections": {
+    "New order": { "main": [[{ "node": "Create checkout", "type": "main", "index": 0 }]] },
+    "Create checkout": { "main": [[{ "node": "Return payment URL", "type": "main", "index": 0 }]] },
+    "Payment completed": { "main": [[{ "node": "Mark order paid", "type": "main", "index": 0 }]] }
+  }
+}

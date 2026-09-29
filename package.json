@@ -1,0 +1,39 @@
+{
+  "name": "n8n-nodes-stablora",
+  "version": "0.2.0",
+  "description": "Stablora crypto payments for n8n: create checkouts, payments and payment links, and trigger workflows on verified payment events.",
+  "license": "MIT",
+  "homepage": "https://stablora.xyz/integrations#n8n",
+  "keywords": ["n8n-community-node-package", "stablora", "crypto", "payments", "usdt", "bitcoin"],
+  "author": { "name": "Stablora", "email": "dev@stablora.xyz" },
+  "repository": { "type": "git", "url": "https://github.com/baydd/n8n-nodes-stablora.git" },
+  "engines": { "node": ">=20.15" },
+  "scripts": {
+    "build": "n8n-node build",
+    "build:watch": "tsc --watch",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "release": "n8n-node release",
+    "prepublishOnly": "n8n-node prerelease",
+    "test": "n8n-node build && node --test test/*.test.mjs"
+  },
+  "files": ["dist", "!dist/tsconfig.tsbuildinfo"],
+  "publishConfig": { "access": "public" },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": ["dist/credentials/StabloraApi.credentials.js"],
+    "nodes": ["dist/nodes/Stablora/Stablora.node.js", "dist/nodes/Stablora/StabloraTrigger.node.js"]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "0.50.2",
+    "eslint": "9.32.0",
+    "prettier": "3.6.2",
+    "release-it": "^19.0.4",
+    "typescript": "5.9.2"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
