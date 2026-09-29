@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Published from GitHub Actions with npm provenance (required for n8n verification).
+
 ## 0.2.0
 
 - Rewritten in TypeScript with `@n8n/node-cli` (lint clean, publish workflow with npm provenance).

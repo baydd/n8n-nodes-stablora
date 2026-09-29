@@ -1,12 +1,12 @@
 {
   "name": "n8n-nodes-stablora",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Stablora crypto payments for n8n: create checkouts, payments and payment links, and trigger workflows on verified payment events.",
   "license": "MIT",
   "homepage": "https://stablora.xyz/integrations#n8n",
   "keywords": ["n8n-community-node-package", "stablora", "crypto", "payments", "usdt", "bitcoin"],
   "author": { "name": "Stablora", "email": "dev@stablora.xyz" },
-  "repository": { "type": "git", "url": "https://github.com/baydd/n8n-nodes-stablora.git" },
+  "repository": { "type": "git", "url": "git+https://github.com/baydd/n8n-nodes-stablora.git" },
   "engines": { "node": ">=20.15" },
   "scripts": {
     "build": "n8n-node build",
