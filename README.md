@@ -13,16 +13,15 @@ Nothing in these nodes can send money out (no payouts, no refunds).
 
 ## Install
 
-**n8n (self-hosted):** Settings → Community Nodes → Install → `n8n-nodes-stablora` → Install
-(once the package is on npm; see *Publishing*).
+**n8n (self-hosted):** Settings → Community Nodes → Install → `n8n-nodes-stablora` → Install.
 
 **Before npm:** `npm ci && npm run build`, then copy `package.json` and `dist/` to
 `~/.n8n/custom/n8n-nodes-stablora` (or point `N8N_CUSTOM_EXTENSIONS` at its parent folder) and
 restart n8n.
 
 **n8n Cloud** lists only community nodes that n8n has verified. This package is prepared for
-verification (TypeScript, `n8n-node lint` clean, no runtime dependencies, MIT) but has not been
-submitted yet.
+verification (published with npm provenance, `@n8n/scan-community-package` passes) and is in n8n's
+review.
 
 The **Stablora** node also works as an AI Agent tool (`usableAsTool`).
 
